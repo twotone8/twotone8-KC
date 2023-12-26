@@ -1,0 +1,91 @@
+OnInit
+Chat Send "Kruiz Control Initialized"
+MakeList
+
+OnCommand b 0 !example
+Chat Send "Success! It worked!"
+
+OnCommand b 0 !kcreset
+Reset
+
+##intro.  make better later add songs back
+OnTimer "Welcome Message" 3600 1000
+Chat Send "Welcome in!  Now SCRAM!     !sfx | !videos | !random"
+
+##Sounds list stuff.  The first 'OnAction' section lets me set the list in just one place.  Then the timer plays the chat periodically, then the command to play it.
+
+OnAction sfxlist
+List Join SFXList " / "
+Chat Send "SFX COMMANDS: {joined}"
+
+OnTimer "sfx reminder" 7200 10
+sfxlist
+
+OnCommand e 0 !sfx
+sfxlist
+
+OnAction songlist
+List Join SongList " / "
+Chat Send "SONG COMMANDS: {joined}"
+
+## save for later
+##OnTimer "songs reminder" 3600 3600
+##songlist
+
+OnCommand e 0 !songs
+songlist
+
+##Video list stuff
+OnAction videolist
+List Join VideoList " / "
+Chat Send "VIDEO COMMANDS: {joined}"
+
+#OnTimer "video reminder" 3600 1800
+#videolist
+
+#discord
+OnCommand e 0 !discord
+Chat Send "I made my discord home at the Retro-Syndicate' Discord server. Come hang out! https://discord.gg/cY9KMKckze"
+
+#experimental splitting of video list into random chunks
+
+OnAction videolistshort
+List Export VideoList
+List Import VideoListCopy {VideoList}
+Loop 2 15
+List Remove VideoListCopy
+List Add VideoListCopy2 {value}
+List Join VideoListCopy2 ", "
+Chat Send "Try some videos: {joined}| Type !videos to see some more, or check out all the videos here: https://discord.gg/kBqdurYtFJ."
+List Empty VideoListCopy
+List Empty VideoListCopy2
+#Timer Reset VideoCommands
+
+OnTimer "video reminder short" 1800 900
+videolistshort
+
+##used to be videolist, but let's chane it up.  the original way was too long.
+OnCommand e 0 !videos
+videolistshort
+##videolist
+
+
+
+##experimental granny stuff.  make sure to add the 'MakeList' command up top under ethe 'OnInit' section.
+OnAction MakeList
+#SFX List
+API GET '.\lists\sfxlist.txt'
+Function "let lines = [api_data].trim().split(/\r\n|\n/);return {lines: lines}"
+List Import SFXList [lines]
+#Song List
+API GET '.\lists\songlist.txt'
+Function "let lines = [api_data].trim().split(/\r\n|\n/);return {lines: lines}"
+List Import SongList [lines]
+#Video List
+API GET '.\lists\videolist.txt'
+Function "let lines = [api_data].trim().split(/\r\n|\n/);return {lines: lines}"
+List Import VideoList [lines]
+#Welcome Vids List
+API GET 'lists\welcome_vids.txt'
+Function "let lines = [api_data].trim().split(/\r\n|\n/);return {lines: lines}"
+List Import WelcomeVids [lines]

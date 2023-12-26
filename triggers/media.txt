@@ -1,0 +1,261 @@
+##Matt's Sounds
+OnEveryChatMessage
+If 1 {user} = "t8robo"
+Exit
+SoundKeywordCheck
+VideoKeywordCheck
+
+OnAction SoundKeywordCheck
+List Export SFXList
+Function "var combined = [SFXList]; var keywords = combined.substring(1, combined.length - 1).replace(/\",/g,'\" '); return { actions: [`Param Keyword message ${keywords}`] };"
+If 2 {matched} = "true"
+Play 100 wait {match}.mp3
+Exit
+List Export SongList
+Function "var combined2 = [SongList]; var keywords2 = combined2.substring(1, combined2.length - 1).replace(/\",/g,'\" '); return { actions: [`Param Keyword message ${keywords2}`] };"
+If 1 {matched} = "true"
+Play 100 wait {match}.mp3
+
+
+#videos can be any size.  the bounding in obs tells it where to go. The 'VideoTrack, ShushCheck, or VideoTimer, calls may set a flag to play the video quietly.  It should revert the volume to normal afterwards.
+OnAction VideoKeywordCheck
+List Export VideoList
+Function "var combined3 = [VideoList]; var keywords3 = combined3.substring(1, combined3.length - 1).replace(/\",/g,'\" '); return { actions: [`Param Keyword message ${keywords3}`] };"
+If 16 {matched} = "true"
+VideoTimer ####this is a test in videotimers.txt.  if you remove this, adjust the 'If' to remove/add this line.  The following 'Param Exists QuietVid is to make sure timed out vids don't count against the users 5 vid limit for the stream.###
+Param Exists QuietVid
+  If 1 {exists} = false 
+VideoTrack
+ShushCheck
+OBS Source "Idle AV" off
+Param Exists QuietVid
+  If 1 {exists} = true
+OBS Volume "Videos" -35 true
+OBS Media Path Videos "V:/Stream Stuff/Video Stuff/StreamClips/{match}.webm"
+Delay 1
+OBS Media Duration Videos
+Delay {duration}
+OBS Media Path Videos ""
+OBS Source "Idle AV" on
+OBS Volume "Videos" {previous_volume} true
+
+##with grannys help, this lowers the volume on videos submitted by users if they spam a specific variable
+OnAction VideoTrack
+If 8 {user} != "twotone8"
+Variable Load {user}_{match}
+If 2 {{user}_{match}} = "No variable found"
+Variable Set {user}_{match} 0
+List Add VideoTimeouts "{user}_{match}"
+Param Add {user}_{match} 1
+Variable Set {user}_{match} "{{user}_{match}}"
+If 1 {{user}_{match}} >= "6"
+Param Create QuietVid 0
+
+##used to reset folks from the low volume corner
+OnCommand b 0 !resetvideos
+List Count VideoTimeouts
+Loop 2 {count}
+List Remove VideoTimeouts
+Variable Remove {value}
+#adding grammys values for the video coolowns stuff in videotimers.txt
+#OnCommand b 0 !resetcooldowns
+List Count ActiveCooldowns
+List Get ActiveCooldowns 0
+Loop 3 {count}
+Cooldown Clear {value}
+Param Add index 1
+List Get ActiveCooldowns {index}
+
+## random video.  
+OnCommand e 0 !random
+List Get VideoList
+RandomTrack
+ShushCheck
+OBS Source "Idle AV" off
+Param Exists QuietVid
+  If 1 {exists} = true
+OBS Volume "Videos" -35 true
+OBS Media Path Videos "V:/Stream Stuff/Video Stuff/StreamClips/{value}.webm"
+Chat Send "Now Playing: {value}"
+Delay 1
+OBS Media Duration Videos
+Delay {duration}
+OBS Media Path Videos ""
+OBS Source "Idle AV" on
+OBS Volume "Videos" {previous_volume} true
+
+## adds randoms to the quiet list
+OnAction RandomTrack
+Variable Load {user}_{value}
+If 2 {{user}_{value}} = "No variable found"
+Variable Set {user}_{value} 0
+List Add VideoTimeouts "{user}_{match}"
+Param Add {user}_{value} 1
+Variable Set {user}_{value} "{{user}_{value}}"
+If 1 {{user}_{value}} >= "6"
+#OBS Volume "Videos" -35 true #get  rid of this if the following param trick works
+Param Create QuietVid 0
+
+##shush list
+OnCommand b 0 !shush
+List Add shushlist {after}
+
+OnCommand b 0 !unshush
+List Remove shushlist {after}
+
+OnAction ShushCheck
+List Index shushlist {user}
+if 1 {index} != "-1"
+#OBS Volume "Videos" -35 true
+Param Create QuietVid 0
+
+## big vids.  videos that fill the main screen
+OnCommand b 0 !t8-metroid
+OBS Source "Idle AV" off
+OBS Media Path BigVids "V:/Stream Stuff/Video Stuff/StreamClips/t8-metroid.webm"
+Chat Send "Now Playing: t8-metroid"
+Delay 1
+OBS Media Duration BigVids
+Delay {duration}
+OBS Media Path BigVids ""
+OBS Source "Idle AV" on
+
+OnCommand b 0 !t8-ikaruga
+OBS Source "Idle AV" off
+OBS Media Path BigVids "V:/Stream Stuff/Video Stuff/StreamClips/t8-ikaruga.webm"
+Chat Send "Now Playing: t8-metroid"
+Delay 1
+OBS Media Duration BigVids
+Delay {duration}
+OBS Media Path BigVids ""
+OBS Source "Idle AV" on
+
+OnCommand b 0 !ihatechristmas
+OBS Source "Idle AV" off
+OBS Media Path BigVids "V:/Stream Stuff/Video Stuff/StreamClips/!ihatechristmas.webm"
+Chat Send "Now Playing: !ihatechristmas"
+Delay 1
+OBS Media Duration BigVids
+Delay {duration}
+OBS Media Path BigVids ""
+OBS Source "Idle AV" on
+
+OnCommand b 0 !ihatechristmas-s
+OBS Source "Idle AV" off
+OBS Media Path Videos "V:/Stream Stuff/Video Stuff/StreamClips/!ihatechristmas.webm"
+Chat Send "Now Playing: !ihatechristmas"
+Delay 1
+OBS Media Duration Videos
+Param Subtract duration 1
+Delay {duration}
+OBS Source "Idle AV" on
+
+OnCommand b 0 !alliwantforchristmas
+OBS Source "Idle AV" off
+OBS Media Path Videos "V:/Stream Stuff/Video Stuff/StreamClips/!alliwantforchristmas.webm"
+Chat Send "Now Playing: !alliwantforchristmas"
+Delay 1
+OBS Media Duration Videos
+Param Subtract duration 1
+Delay {duration}
+OBS Source "Idle AV" on
+
+OnCommand b 0 !t8-ikaruga-s
+OBS Source "Idle AV" off
+OBS Media Path Videos "V:/Stream Stuff/Video Stuff/StreamClips/t8-ikaruga.webm"
+Chat Send "Now Playing: t8-ikaruga"
+Delay 1
+OBS Media Duration Videos
+Delay {duration}
+OBS Media Path Videos ""
+OBS Source "Idle AV" on
+
+OnCommand b 0 !t8-cv64-fall
+OBS Source "Idle AV" off
+OBS Media Path BigVids "V:/Stream Stuff/Video Stuff/Reference Videos/t8-cv64-fall.webm"
+Chat Send "Now Playing: t8-cv64-fall"
+Delay 1
+OBS Media Duration BigVids
+Delay {duration}
+OBS Media Path BigVids ""
+OBS Source "Idle AV" on
+
+OnCommand b 0 !birthday
+OBS Source "Idle AV" off
+OBS Media Path Videos "V:/Stream Stuff/Video Stuff/StreamClips/!birthday.webm"
+Chat Send "Now Playing: !birthday"
+Delay 1
+OBS Media Duration Videos
+Param Subtract duration 1
+Delay {duration}
+OBS Source "Idle AV" on
+
+##Experimental shoutout functionality - t8 move this to triggers.txt so its not time sensitive
+OnCommand mvb 0 !so 
+Twitch Shoutout {after}
+ShoutoutClip
+
+#grandma twitch clip player code
+OnAction ShoutoutClip
+Twitch ClipsByUser {after} 100
+Random Number 1 {clip_count}
+function 'var temp =[clip{number}].split("/").slice(-1);var url="https://clips.twitch.tv/embed?autoplay=true&clip="+temp+"&controls=false&parent=streamernews.example.com";return {url:url};'
+OBS Source "Clips" URL "{url}"
+ShoutoutText
+OBS Source ClipName Text "Check Out {name}"
+OBS Source ClipName on
+Param Add duration{number} 2
+Delay {duration{number}}
+OBS Source ClipName off
+OBS Source "Clips" URL ""
+
+#Sends Discription of User's stream after a shoutout
+OnAction ShoutoutText
+Twitch ChannelInfo {after}
+Chat Send "Check out {name} at https://twitch.tv/{name}.  Here's what they've been up to: {title}" 
+
+##delay videos and stuff after shoutouts (obsolete with absense of twitch guru)
+##OnCommand mvb 0 !so
+##Delay 30 
+
+## delay videos and stuff after raids
+OnTWRaid
+Chat Send "Holy Moley.  Look at that!  Shazam! We're getting raided by {name}"
+Delay 22
+
+## delay videos and stuff after subscribes and stuff
+OnTWSub
+Delay 15
+
+OnTWSubGift
+Delay 15
+
+##test code to test twitch settings and configuration
+OnCommand b 0 !twitchtest
+Chat Send "i test i test"
+Twitch Slow 3
+Delay 15
+Twitch SlowOff
+Chat Send "i'm working"
+
+#experimental granny welcome vid consolidation.  makelist includes welcome_vids.txt to pull from
+## welcome messages for specific users.
+OnSpeak *
+PlayWelcomeVid
+
+## action we re-use to play every user's welcome message! {message} = the filename
+OnAction PlayWelcomeVid
+List Index WelcomeVids {user}
+If 10 {index} != "-1"
+Param Add index 1
+List Get WelcomeVids {index}
+OBS Media Path Videos "V:/Stream Stuff/Video Stuff/StreamClips/{value}.webm"
+OBS Source "Idle AV" off
+Delay 1
+Play 80 nowait icqdoor.mp3
+OBS Media Duration Videos
+Delay {duration}
+OBS Source "Idle AV" on
+OBS Media Path Videos ""
+
+

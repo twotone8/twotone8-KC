@@ -1,0 +1,70 @@
+###The following code is to make sure videos are played no longer than three times every 30 mins.
+OnAction VideoTimer 
+   If 11 {user} != "twotone8"
+Cooldown Check {match}_timer
+If 1 {{match}_timer} = false
+PlayVideo1st
+Cooldown Check {match}_timer_2
+If 1 {{match}_timer_2} = false
+PlayVideo2nd
+Cooldown Check {match}_timer_3
+If 1 {{match}_timer_3} = false
+PlayVideo3rd
+Param Create QuietVid 0
+Chat Send "Playing {match}, but quietly.  Give it a minnit."
+
+
+OnAction PlayVideo1st
+Cooldown Apply {match}_timer 1800
+List Add ActiveCooldowns "{match}_timer"
+Skip 8
+
+OnAction PlayVideo2nd
+Cooldown Apply "{match}_timer_2" 1800
+List Add ActiveCooldowns "{match}_timer_2"
+Skip 5
+
+OnAction PlayVideo3rd
+Cooldown Apply "{match}_timer_3" 1800
+List Add ActiveCooldowns "{match}_timer_3"
+Skip 2
+
+#here's the version that can be run independently like '!checkcooldowns ilikestories'
+OnCommand b 0 !checkcooldowns
+OutputCooldownsManual
+
+OnAction OutputCooldownsManual
+Cooldown Check !{after}_timer
+If 2 {!{after}_timer} = false
+Chat Send 1st cooldown = clear
+Skip 1
+Chat Send 1st cooldown = {cooldown}
+Cooldown Check !{after}_timer_2
+If 2 {!{after}_timer_2} = false
+Chat Send 2nd cooldown = clear
+Skip 1
+Chat Send 2nd Cooldown = {cooldown}
+Cooldown Check !{after}_timer_3
+If 2 {!{after}_timer_3} = false
+Chat Send 3rd cooldown = clear
+Skip 1
+Chat Send 3rd Cooldown = {cooldown}
+
+##this is a legacy diag check to see if the timers are running and where they're at. Place before the 'Skip' lines in the OutputCooldownManual section. Make sure to adust the 'Skips' in the 'PlayVideo' section above to compensate if you add/remove from the 'OnAction VideoTimer' section. 
+OnAction OutputCooldowns
+Cooldown Check {match}_timer
+If 2 {{match}_timer} = false
+Chat Send 1st cooldown = clear
+Skip 1
+Chat Send 1st cooldown = {cooldown}
+Cooldown Check {match}_timer_2
+If 2 {{match}_timer_2} = false
+Chat Send 2nd cooldown = clear
+Skip 1
+Chat Send 2nd Cooldown = {cooldown}
+Cooldown Check {match}_timer_3
+If 2 {{match}_timer_3} = false
+Chat Send 3rd cooldown = clear
+Skip 1
+Chat Send 3rd Cooldown = {cooldown}
+

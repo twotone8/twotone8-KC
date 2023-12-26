@@ -1,3 +1,2 @@
 media.txt
 videotimers.txt
-#experimental.txt

@@ -70,7 +70,6 @@ videolistshort
 ##videolist
 
 
-
 ##experimental granny stuff.  make sure to add the 'MakeList' command up top under ethe 'OnInit' section.
 OnAction MakeList
 #SFX List

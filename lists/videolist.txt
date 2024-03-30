@@ -85,6 +85,7 @@
 !getreadyforasurprise
 !gettheflute
 !goaway
+!gomtuu
 !gonnamakeit
 !goodboy
 !goofygoober
@@ -224,6 +225,7 @@
 !t8mode
 !technocat
 !teensteam
+!thedemon
 !thegrim
 !thewraith
 !thlammed

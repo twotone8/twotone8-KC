@@ -1,5 +1,6 @@
 !386
 !adragon
+!airair
 !aptiva
 !areyousittingcomfortably
 !argh
@@ -27,11 +28,13 @@
 !california
 !CantTouchThisBattery
 !canyoudigit
+!capcompresents
 !captainkirk
 !captainn
 !captainvegetable
 !castlevania64
 !certaindeath
+!chafemywilly
 !chandelier
 !changethechannel
 !cmonschwartz
@@ -60,6 +63,7 @@
 !disappointed
 !dodongos
 !dontlookatme
+!draculaforce
 !drunkmario
 !duckshred
 !easyshot
@@ -67,7 +71,9 @@
 !excited
 !excusemeprincess
 !fabio
+!falling
 !familyguy-sf
+!farlee
 !fight
 !finebabydoll
 !finishthegame
@@ -96,6 +102,7 @@
 !guin
 !gutentag
 !happy
+!heheheheh
 !hello
 !hellomababy
 !hetasksme
@@ -113,6 +120,7 @@
 !ihaveplungers
 !ijustcantwin
 !ilikestories
+!ilovebeans
 !imshouting
 !imtired
 !inheresomewhere
@@ -166,7 +174,9 @@
 !mrowl
 !mummra
 !mustache
+!myfavorite
 !mystick
+!naneee
 !newgame
 !nintendo
 !nobutterinhell
@@ -195,8 +205,10 @@
 !rat
 !raven
 !readingrambo
+!renegade
 !riven
 !rollingstart
+!roombaws
 !sail
 !sallyforth
 !schmoo
@@ -214,6 +226,7 @@
 !sonicandtails
 !space
 !spaceharrier
+!spindashdiva
 !ssjgoten99
 !starhedgehog
 !stop
@@ -227,6 +240,9 @@
 !teensteam
 !thedemon
 !thegrim
+!themachine
+!themachine2
+!themachine3
 !thewraith
 !thlammed
 !thosedamnvideogames

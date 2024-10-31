@@ -10,8 +10,6 @@ CMYKolours
 !color
 CubeDude
 !cubedude
-DigiDC
-!diggydiggyhole
 dragonsupra10
 !adragon
 Epsilon_the_Derg
@@ -34,7 +32,7 @@ INSOMNIOSIS
 !insomnia
 ItalianGrandma
 !italiangrandma
-itteramaTV
+itterama
 !itterama
 krunchy_the_clown
 !crunchy
@@ -68,6 +66,8 @@ raven_kitari
 !raven
 Read1ngRambo
 !readingrambo
+renegade_johnny
+!renegade
 Retro_Mike
 !fuckingmike
 RetroGamingBacklog
@@ -86,6 +86,8 @@ SHODANFreeman
 !shodanfreeman
 SpacedHarrier
 !spaceharrier
+spindashdiva
+!spindashdiva
 SpiritBuddy
 !mummra
 SSJGoten99

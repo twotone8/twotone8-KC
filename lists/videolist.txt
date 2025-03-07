@@ -33,6 +33,7 @@
 !captainn
 !captainvegetable
 !castlevania64
+!catra
 !certaindeath
 !chafemywilly
 !chandelier
@@ -58,6 +59,7 @@
 !daytona
 !dbz-love
 !diggydiggyhole
+!dingdong
 !dinosaur
 !dirdybirdy
 !disappointed

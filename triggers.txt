@@ -56,7 +56,7 @@ Loop 2 15
 List Remove VideoListCopy
 List Add VideoListCopy2 {value}
 List Join VideoListCopy2 ", "
-Chat Send "Try some videos: {joined}| Type !videos to see some more, or check out all the videos here: https://discord.gg/kBqdurYtFJ."
+Chat Send "Try some videos: {joined}| Type !videos to see some more, or check out all the videos here: twotone8.win. Or on the Discord at: discord.gg/kBqdurYtFJ."
 List Empty VideoListCopy
 List Empty VideoListCopy2
 #Timer Reset VideoCommands

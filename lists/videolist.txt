@@ -88,6 +88,7 @@
 !fuckingmike
 !fuckitall
 !gamecom
+!gameover
 !geronimo
 !getoutofthere
 !getreadyforasurprise
@@ -100,6 +101,7 @@
 !grapefruit
 !grizzlebees
 !grouchy
+!guaranteed
 !guiltyorinnocent
 !guin
 !gutentag
@@ -221,6 +223,7 @@
 !shinobisback
 !shodanfreeman
 !shuffling
+!simonbelmont
 !simplythebest
 !sirian
 !slap
@@ -255,6 +258,7 @@
 !toobularboobular
 !toyrobot
 !tresbien
+!tricksy
 !twelve
 !tsubabababa
 !unclefucker
